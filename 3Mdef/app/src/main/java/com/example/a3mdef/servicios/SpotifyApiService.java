@@ -15,9 +15,21 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 
-    public interface SpotifyApiService {
+/**
+ * The interface Spotify api service.
+ */
+public interface SpotifyApiService {
 
-        // Buscar artistas, álbumes y canciones
+    /**
+     * Search call.
+     *
+     * @param authorization the authorization
+     * @param query         the query
+     * @param type          the type
+     * @param limit         the limit
+     * @return the call
+     */
+// Buscar artistas, álbumes y canciones
     @GET("v1/search")
     Call<SpotifySearchResponse> search(
             @Header("Authorization") String authorization,

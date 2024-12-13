@@ -33,10 +33,11 @@
 
             <!-- Título de la película -->
             <TextView
-                android:id="@+id/titleTextView"
+                android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Movie Title"
+                android:fontFamily="@font/rubikregular"
                 android:textSize="18sp"
                 android:textColor="#212121"
                 android:ellipsize="end"

@@ -1,0 +1,78 @@
+\doxysection{com.\+example.\+a3mdef.\+Books\+Fragment Class Reference}
+\hypertarget{classcom_1_1example_1_1a3mdef_1_1_books_fragment}{}\label{classcom_1_1example_1_1a3mdef_1_1_books_fragment}\index{com.example.a3mdef.BooksFragment@{com.example.a3mdef.BooksFragment}}
+Inheritance diagram for com.\+example.\+a3mdef.\+Books\+Fragment\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classcom_1_1example_1_1a3mdef_1_1_books_fragment}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1a3mdef_1_1_books_fragment_abc6b75e81f3aba9b8a5264ddc1e64910}{on\+Create}} (Bundle saved\+Instance\+State)
+\item 
+View \mbox{\hyperlink{classcom_1_1example_1_1a3mdef_1_1_books_fragment_a07df2896530c254b567d0c1b2ddc5d45}{on\+Create\+View}} (Layout\+Inflater inflater, View\+Group container, Bundle saved\+Instance\+State)
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1a3mdef_1_1_books_fragment_a4fb2cc5bcb43561c0458bac09754012a}{on\+View\+Created}} (@Non\+Null View view, @Nullable Bundle saved\+Instance\+State)
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1a3mdef_1_1_books_fragment_a602ac10110f422d6830ada94f8193151}{on\+Resume}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Fragmento que muestra una lista de libros y permite buscar libros a través de un campo de búsqueda. Al seleccionar un libro, se muestra su detalle en un fragmento separado. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcom_1_1example_1_1a3mdef_1_1_books_fragment_abc6b75e81f3aba9b8a5264ddc1e64910}\index{com.example.a3mdef.BooksFragment@{com.example.a3mdef.BooksFragment}!onCreate@{onCreate}}
+\index{onCreate@{onCreate}!com.example.a3mdef.BooksFragment@{com.example.a3mdef.BooksFragment}}
+\doxysubsubsection{\texorpdfstring{onCreate()}{onCreate()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1a3mdef_1_1_books_fragment_abc6b75e81f3aba9b8a5264ddc1e64910} 
+void com.\+example.\+a3mdef.\+Books\+Fragment.\+on\+Create (\begin{DoxyParamCaption}\item[{Bundle}]{saved\+Instance\+State}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Se ejecuta cuando se crea el fragmento. Asegura que el fragmento no se destruya al cambiar de fragmento. 
+\begin{DoxyParams}{Parameters}
+{\em saved\+Instance\+State} & El estado guardado de la instancia, si está disponible. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classcom_1_1example_1_1a3mdef_1_1_books_fragment_a07df2896530c254b567d0c1b2ddc5d45}\index{com.example.a3mdef.BooksFragment@{com.example.a3mdef.BooksFragment}!onCreateView@{onCreateView}}
+\index{onCreateView@{onCreateView}!com.example.a3mdef.BooksFragment@{com.example.a3mdef.BooksFragment}}
+\doxysubsubsection{\texorpdfstring{onCreateView()}{onCreateView()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1a3mdef_1_1_books_fragment_a07df2896530c254b567d0c1b2ddc5d45} 
+View com.\+example.\+a3mdef.\+Books\+Fragment.\+on\+Create\+View (\begin{DoxyParamCaption}\item[{Layout\+Inflater}]{inflater}{, }\item[{View\+Group}]{container}{, }\item[{Bundle}]{saved\+Instance\+State}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Se ejecuta cuando se crea la vista del fragmento. Infla el layout y prepara las vistas para mostrar la lista de libros y el campo de búsqueda. 
+\begin{DoxyParams}{Parameters}
+{\em inflater} & El objeto Layout\+Inflater para inflar la vista. \\
+\hline
+{\em container} & El contenedor en el que se colocará la vista. \\
+\hline
+{\em saved\+Instance\+State} & El estado guardado de la instancia, si está disponible. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+La vista inflada que representa el contenido del fragmento. 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1example_1_1a3mdef_1_1_books_fragment_a602ac10110f422d6830ada94f8193151}\index{com.example.a3mdef.BooksFragment@{com.example.a3mdef.BooksFragment}!onResume@{onResume}}
+\index{onResume@{onResume}!com.example.a3mdef.BooksFragment@{com.example.a3mdef.BooksFragment}}
+\doxysubsubsection{\texorpdfstring{onResume()}{onResume()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1a3mdef_1_1_books_fragment_a602ac10110f422d6830ada94f8193151} 
+void com.\+example.\+a3mdef.\+Books\+Fragment.\+on\+Resume (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Se ejecuta cuando el fragmento es visible. Aquí se actualiza la lista de libros si ha habido cambios en el View\+Model. \Hypertarget{classcom_1_1example_1_1a3mdef_1_1_books_fragment_a4fb2cc5bcb43561c0458bac09754012a}\index{com.example.a3mdef.BooksFragment@{com.example.a3mdef.BooksFragment}!onViewCreated@{onViewCreated}}
+\index{onViewCreated@{onViewCreated}!com.example.a3mdef.BooksFragment@{com.example.a3mdef.BooksFragment}}
+\doxysubsubsection{\texorpdfstring{onViewCreated()}{onViewCreated()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1a3mdef_1_1_books_fragment_a4fb2cc5bcb43561c0458bac09754012a} 
+void com.\+example.\+a3mdef.\+Books\+Fragment.\+on\+View\+Created (\begin{DoxyParamCaption}\item[{@Non\+Null View}]{view}{, }\item[{@Nullable Bundle}]{saved\+Instance\+State}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Se ejecuta después de que la vista ha sido creada. Inicializa las vistas, el adaptador de la lista de libros y configura la búsqueda. También observa los cambios en la lista de libros para actualizar la vista. 
+\begin{DoxyParams}{Parameters}
+{\em view} & La vista creada en \doxylink{classcom_1_1example_1_1a3mdef_1_1_books_fragment_a07df2896530c254b567d0c1b2ddc5d45}{on\+Create\+View()}. \\
+\hline
+{\em saved\+Instance\+State} & El estado guardado de la instancia, si está disponible. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+app/src/main/java/com/example/a3mdef/Books\+Fragment.\+java\end{DoxyCompactItemize}

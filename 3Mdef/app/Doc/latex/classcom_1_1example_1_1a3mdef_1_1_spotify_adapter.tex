@@ -1,0 +1,155 @@
+\doxysection{com.\+example.\+a3mdef.\+Spotify\+Adapter Class Reference}
+\hypertarget{classcom_1_1example_1_1a3mdef_1_1_spotify_adapter}{}\label{classcom_1_1example_1_1a3mdef_1_1_spotify_adapter}\index{com.example.a3mdef.SpotifyAdapter@{com.example.a3mdef.SpotifyAdapter}}
+Inheritance diagram for com.\+example.\+a3mdef.\+Spotify\+Adapter\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classcom_1_1example_1_1a3mdef_1_1_spotify_adapter}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bfseries Album\+View\+Holder}
+\item 
+class {\bfseries Artist\+View\+Holder}
+\item 
+class {\bfseries Cancion\+View\+Holder}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcom_1_1example_1_1a3mdef_1_1_spotify_adapter_ad89c6d815e56c6950a4ae2cb4d3aa415}{Spotify\+Adapter}} ()
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1a3mdef_1_1_spotify_adapter_ac079f6993af1ede0f03dfbd7cdb9ae6c}{set\+Artists}} (List$<$ \mbox{\hyperlink{classcom_1_1example_1_1a3mdef_1_1modelos_1_1_artist}{Artist}} $>$ artists)
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1a3mdef_1_1_spotify_adapter_a22be3a6499d3fe676428664a612e31e0}{set\+Albums}} (List$<$ \mbox{\hyperlink{classcom_1_1example_1_1a3mdef_1_1modelos_1_1_album}{Album}} $>$ albums)
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1a3mdef_1_1_spotify_adapter_aa0d5356eb6b7135e9d4d8cbb8f535b5c}{set\+Tracks}} (List$<$ \mbox{\hyperlink{classcom_1_1example_1_1a3mdef_1_1modelos_1_1_track}{Track}} $>$ tracks)
+\item 
+int \mbox{\hyperlink{classcom_1_1example_1_1a3mdef_1_1_spotify_adapter_a488a5aa75a1316c3e232dec042786c72}{get\+Item\+View\+Type}} (int position)
+\item 
+Recycler\+View.\+View\+Holder \mbox{\hyperlink{classcom_1_1example_1_1a3mdef_1_1_spotify_adapter_aa6bb44ef12bb4bab1979a1bf0166ce6e}{on\+Create\+View\+Holder}} (View\+Group parent, int view\+Type)
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1a3mdef_1_1_spotify_adapter_a7185831bc18ba64dc98852e00eae74b6}{on\+Bind\+View\+Holder}} (Recycler\+View.\+View\+Holder holder, int position)
+\item 
+int \mbox{\hyperlink{classcom_1_1example_1_1a3mdef_1_1_spotify_adapter_a269978f886fc34584223c89e74fff011}{get\+Item\+Count}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Adaptador para Recycler\+View que maneja tres tipos de elementos\+: artistas, álbumes y canciones. Utiliza múltiples tipos de vistas para mostrar los diferentes elementos en el Recycler\+View. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classcom_1_1example_1_1a3mdef_1_1_spotify_adapter_ad89c6d815e56c6950a4ae2cb4d3aa415}\index{com.example.a3mdef.SpotifyAdapter@{com.example.a3mdef.SpotifyAdapter}!SpotifyAdapter@{SpotifyAdapter}}
+\index{SpotifyAdapter@{SpotifyAdapter}!com.example.a3mdef.SpotifyAdapter@{com.example.a3mdef.SpotifyAdapter}}
+\doxysubsubsection{\texorpdfstring{SpotifyAdapter()}{SpotifyAdapter()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1a3mdef_1_1_spotify_adapter_ad89c6d815e56c6950a4ae2cb4d3aa415} 
+com.\+example.\+a3mdef.\+Spotify\+Adapter.\+Spotify\+Adapter (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor del adaptador. Inicializa las listas de artistas, álbumes y canciones. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcom_1_1example_1_1a3mdef_1_1_spotify_adapter_a269978f886fc34584223c89e74fff011}\index{com.example.a3mdef.SpotifyAdapter@{com.example.a3mdef.SpotifyAdapter}!getItemCount@{getItemCount}}
+\index{getItemCount@{getItemCount}!com.example.a3mdef.SpotifyAdapter@{com.example.a3mdef.SpotifyAdapter}}
+\doxysubsubsection{\texorpdfstring{getItemCount()}{getItemCount()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1a3mdef_1_1_spotify_adapter_a269978f886fc34584223c89e74fff011} 
+int com.\+example.\+a3mdef.\+Spotify\+Adapter.\+get\+Item\+Count (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Devuelve el número total de elementos (artistas, álbumes y canciones) en el Recycler\+View.
+
+\begin{DoxyReturn}{Returns}
+El número total de elementos. 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1example_1_1a3mdef_1_1_spotify_adapter_a488a5aa75a1316c3e232dec042786c72}\index{com.example.a3mdef.SpotifyAdapter@{com.example.a3mdef.SpotifyAdapter}!getItemViewType@{getItemViewType}}
+\index{getItemViewType@{getItemViewType}!com.example.a3mdef.SpotifyAdapter@{com.example.a3mdef.SpotifyAdapter}}
+\doxysubsubsection{\texorpdfstring{getItemViewType()}{getItemViewType()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1a3mdef_1_1_spotify_adapter_a488a5aa75a1316c3e232dec042786c72} 
+int com.\+example.\+a3mdef.\+Spotify\+Adapter.\+get\+Item\+View\+Type (\begin{DoxyParamCaption}\item[{int}]{position}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Devuelve el tipo de vista para el elemento en la posición especificada.
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & La posición del elemento en el Recycler\+View. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Un entero que indica el tipo de vista (ARTIST, ALBUM, TRACK). 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1example_1_1a3mdef_1_1_spotify_adapter_a7185831bc18ba64dc98852e00eae74b6}\index{com.example.a3mdef.SpotifyAdapter@{com.example.a3mdef.SpotifyAdapter}!onBindViewHolder@{onBindViewHolder}}
+\index{onBindViewHolder@{onBindViewHolder}!com.example.a3mdef.SpotifyAdapter@{com.example.a3mdef.SpotifyAdapter}}
+\doxysubsubsection{\texorpdfstring{onBindViewHolder()}{onBindViewHolder()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1a3mdef_1_1_spotify_adapter_a7185831bc18ba64dc98852e00eae74b6} 
+void com.\+example.\+a3mdef.\+Spotify\+Adapter.\+on\+Bind\+View\+Holder (\begin{DoxyParamCaption}\item[{Recycler\+View.\+View\+Holder}]{holder}{, }\item[{int}]{position}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Vincula los datos del modelo con las vistas del View\+Holder.
+
+
+\begin{DoxyParams}{Parameters}
+{\em holder} & El View\+Holder que contiene las vistas. \\
+\hline
+{\em position} & La posición del elemento en el Recycler\+View. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classcom_1_1example_1_1a3mdef_1_1_spotify_adapter_aa6bb44ef12bb4bab1979a1bf0166ce6e}\index{com.example.a3mdef.SpotifyAdapter@{com.example.a3mdef.SpotifyAdapter}!onCreateViewHolder@{onCreateViewHolder}}
+\index{onCreateViewHolder@{onCreateViewHolder}!com.example.a3mdef.SpotifyAdapter@{com.example.a3mdef.SpotifyAdapter}}
+\doxysubsubsection{\texorpdfstring{onCreateViewHolder()}{onCreateViewHolder()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1a3mdef_1_1_spotify_adapter_aa6bb44ef12bb4bab1979a1bf0166ce6e} 
+Recycler\+View.\+View\+Holder com.\+example.\+a3mdef.\+Spotify\+Adapter.\+on\+Create\+View\+Holder (\begin{DoxyParamCaption}\item[{View\+Group}]{parent}{, }\item[{int}]{view\+Type}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Crea la vista correspondiente para el tipo de elemento especificado.
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & El contenedor donde se agregará la vista. \\
+\hline
+{\em view\+Type} & El tipo de vista (ARTIST, ALBUM, TRACK). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Un View\+Holder correspondiente al tipo de vista. 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1example_1_1a3mdef_1_1_spotify_adapter_a22be3a6499d3fe676428664a612e31e0}\index{com.example.a3mdef.SpotifyAdapter@{com.example.a3mdef.SpotifyAdapter}!setAlbums@{setAlbums}}
+\index{setAlbums@{setAlbums}!com.example.a3mdef.SpotifyAdapter@{com.example.a3mdef.SpotifyAdapter}}
+\doxysubsubsection{\texorpdfstring{setAlbums()}{setAlbums()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1a3mdef_1_1_spotify_adapter_a22be3a6499d3fe676428664a612e31e0} 
+void com.\+example.\+a3mdef.\+Spotify\+Adapter.\+set\+Albums (\begin{DoxyParamCaption}\item[{List$<$ \mbox{\hyperlink{classcom_1_1example_1_1a3mdef_1_1modelos_1_1_album}{Album}} $>$}]{albums}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Establece la lista de álbumes en el adaptador.
+
+
+\begin{DoxyParams}{Parameters}
+{\em albums} & Lista de álbumes a mostrar. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classcom_1_1example_1_1a3mdef_1_1_spotify_adapter_ac079f6993af1ede0f03dfbd7cdb9ae6c}\index{com.example.a3mdef.SpotifyAdapter@{com.example.a3mdef.SpotifyAdapter}!setArtists@{setArtists}}
+\index{setArtists@{setArtists}!com.example.a3mdef.SpotifyAdapter@{com.example.a3mdef.SpotifyAdapter}}
+\doxysubsubsection{\texorpdfstring{setArtists()}{setArtists()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1a3mdef_1_1_spotify_adapter_ac079f6993af1ede0f03dfbd7cdb9ae6c} 
+void com.\+example.\+a3mdef.\+Spotify\+Adapter.\+set\+Artists (\begin{DoxyParamCaption}\item[{List$<$ \mbox{\hyperlink{classcom_1_1example_1_1a3mdef_1_1modelos_1_1_artist}{Artist}} $>$}]{artists}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Establece la lista de artistas en el adaptador.
+
+
+\begin{DoxyParams}{Parameters}
+{\em artists} & Lista de artistas a mostrar. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classcom_1_1example_1_1a3mdef_1_1_spotify_adapter_aa0d5356eb6b7135e9d4d8cbb8f535b5c}\index{com.example.a3mdef.SpotifyAdapter@{com.example.a3mdef.SpotifyAdapter}!setTracks@{setTracks}}
+\index{setTracks@{setTracks}!com.example.a3mdef.SpotifyAdapter@{com.example.a3mdef.SpotifyAdapter}}
+\doxysubsubsection{\texorpdfstring{setTracks()}{setTracks()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1a3mdef_1_1_spotify_adapter_aa0d5356eb6b7135e9d4d8cbb8f535b5c} 
+void com.\+example.\+a3mdef.\+Spotify\+Adapter.\+set\+Tracks (\begin{DoxyParamCaption}\item[{List$<$ \mbox{\hyperlink{classcom_1_1example_1_1a3mdef_1_1modelos_1_1_track}{Track}} $>$}]{tracks}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Establece la lista de canciones en el adaptador.
+
+
+\begin{DoxyParams}{Parameters}
+{\em tracks} & Lista de canciones a mostrar. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+app/src/main/java/com/example/a3mdef/Spotify\+Adapter.\+java\end{DoxyCompactItemize}

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@drawable/rounded_background"
+        android:elevation="4dp">
+
+        <!-- Imagen del libro -->
+        <ImageView
+            android:id="@+id/bookCoverImageView"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:scaleType="fitCenter"
+            android:layout_marginBottom="16dp"
+            android:layout_gravity="center"
+            android:background="@drawable/rounded_image_border"
+            android:layout_marginTop="16dp"/>
+
+        <!-- Título del libro -->
+        <TextView
+            android:id="@+id/bookTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="26sp"
+            android:textColor="@android:color/black"
+            android:fontFamily="@font/rubikbolditalic"
+            android:layout_marginBottom="8dp"
+            android:textAlignment="center"
+            android:layout_gravity="center_horizontal"
+            android:text="Título del libro"/>
+
+        <!-- Autores del libro -->
+        <TextView
+            android:id="@+id/bookAuthorsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="italic"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginBottom="8dp"
+            android:textAlignment="center"
+            android:layout_gravity="center_horizontal"/>
+
+        <!-- Categoría -->
+        <TextView
+            android:id="@+id/bookCategoryTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@android:color/secondary_text_dark"
+            android:layout_marginBottom="8dp"
+            android:textAlignment="center"
+            android:layout_gravity="center_horizontal"/>
+
+        <!-- Descripción -->
+        <TextView
+            android:id="@+id/bookDescriptionTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:lineSpacingExtra="6dp"
+            android:textColor="@android:color/black"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/rubikregular"
+            android:text="Descripción del libro..."
+            android:textAlignment="center"
+            android:layout_gravity="center_horizontal"/>
+
+        <!-- Fecha de publicación -->
+        <TextView
+            android:id="@+id/bookPublishedDateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@android:color/tertiary_text_light"
+            android:textAlignment="center"
+            android:layout_gravity="center_horizontal"/>
+
+        <!-- Enlace a más información -->
+        <TextView
+            android:id="@+id/bookInfoLinkTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@android:color/holo_blue_dark"
+            android:layout_marginBottom="16dp"
+            android:text="Más información"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/rubikregular"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="8dp"
+            android:textAlignment="center"
+            android:background="?android:attr/selectableItemBackground" />
+
+
+    </LinearLayout>
+</ScrollView>

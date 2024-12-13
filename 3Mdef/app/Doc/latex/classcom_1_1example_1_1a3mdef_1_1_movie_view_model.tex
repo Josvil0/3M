@@ -1,0 +1,113 @@
+\doxysection{com.\+example.\+a3mdef.\+Movie\+View\+Model Class Reference}
+\hypertarget{classcom_1_1example_1_1a3mdef_1_1_movie_view_model}{}\label{classcom_1_1example_1_1a3mdef_1_1_movie_view_model}\index{com.example.a3mdef.MovieViewModel@{com.example.a3mdef.MovieViewModel}}
+Inheritance diagram for com.\+example.\+a3mdef.\+Movie\+View\+Model\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classcom_1_1example_1_1a3mdef_1_1_movie_view_model}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+Live\+Data$<$ List$<$ \mbox{\hyperlink{classcom_1_1example_1_1a3mdef_1_1modelos_1_1_movie}{Movie}} $>$ $>$ \mbox{\hyperlink{classcom_1_1example_1_1a3mdef_1_1_movie_view_model_a83554355fcdf626a4701aaee2304fc15}{get\+Movies}} ()
+\item 
+Live\+Data$<$ String $>$ \mbox{\hyperlink{classcom_1_1example_1_1a3mdef_1_1_movie_view_model_afba142403e3acb15bb354ada19104ed0}{get\+Error\+Message}} ()
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1a3mdef_1_1_movie_view_model_a1569a5e4fde4589aec6d6ecfe18ac801}{set\+Movies}} (List$<$ \mbox{\hyperlink{classcom_1_1example_1_1a3mdef_1_1modelos_1_1_movie}{Movie}} $>$ movies)
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1a3mdef_1_1_movie_view_model_afa5dec643c75ac3b14db0a03b66e0f8f}{set\+Error\+Message}} (String message)
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1a3mdef_1_1_movie_view_model_a0ac7b2463879e04a1aabcd0ac91b04fd}{fetch\+Movies}} (String api\+Key, String query)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+View\+Model que gestiona los datos de películas obtenidos desde la API de TMDb. Se encarga de realizar las búsquedas y almacenar los resultados o los errores. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcom_1_1example_1_1a3mdef_1_1_movie_view_model_a0ac7b2463879e04a1aabcd0ac91b04fd}\index{com.example.a3mdef.MovieViewModel@{com.example.a3mdef.MovieViewModel}!fetchMovies@{fetchMovies}}
+\index{fetchMovies@{fetchMovies}!com.example.a3mdef.MovieViewModel@{com.example.a3mdef.MovieViewModel}}
+\doxysubsubsection{\texorpdfstring{fetchMovies()}{fetchMovies()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1a3mdef_1_1_movie_view_model_a0ac7b2463879e04a1aabcd0ac91b04fd} 
+void com.\+example.\+a3mdef.\+Movie\+View\+Model.\+fetch\+Movies (\begin{DoxyParamCaption}\item[{String}]{api\+Key}{, }\item[{String}]{query}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Realiza una búsqueda de películas a través de la API de TMDb.
+
+
+\begin{DoxyParams}{Parameters}
+{\em api\+Key} & La clave API de TMDb para autenticar las solicitudes. \\
+\hline
+{\em query} & El texto de búsqueda de las películas. \\
+\hline
+\end{DoxyParams}
+Callback cuando la respuesta de la API es exitosa.
+
+
+\begin{DoxyParams}{Parameters}
+{\em call} & La llamada que se realizó. \\
+\hline
+{\em response} & La respuesta obtenida de la API.\\
+\hline
+\end{DoxyParams}
+Callback cuando la solicitud falla.
+
+
+\begin{DoxyParams}{Parameters}
+{\em call} & La llamada que se realizó. \\
+\hline
+{\em t} & El error que ocurrió durante la ejecución.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{classcom_1_1example_1_1a3mdef_1_1_movie_view_model_afba142403e3acb15bb354ada19104ed0}\index{com.example.a3mdef.MovieViewModel@{com.example.a3mdef.MovieViewModel}!getErrorMessage@{getErrorMessage}}
+\index{getErrorMessage@{getErrorMessage}!com.example.a3mdef.MovieViewModel@{com.example.a3mdef.MovieViewModel}}
+\doxysubsubsection{\texorpdfstring{getErrorMessage()}{getErrorMessage()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1a3mdef_1_1_movie_view_model_afba142403e3acb15bb354ada19104ed0} 
+Live\+Data$<$ String $>$ com.\+example.\+a3mdef.\+Movie\+View\+Model.\+get\+Error\+Message (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Devuelve el mensaje de error observado.
+
+\begin{DoxyReturn}{Returns}
+Un objeto Live\+Data que contiene el mensaje de error. 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1example_1_1a3mdef_1_1_movie_view_model_a83554355fcdf626a4701aaee2304fc15}\index{com.example.a3mdef.MovieViewModel@{com.example.a3mdef.MovieViewModel}!getMovies@{getMovies}}
+\index{getMovies@{getMovies}!com.example.a3mdef.MovieViewModel@{com.example.a3mdef.MovieViewModel}}
+\doxysubsubsection{\texorpdfstring{getMovies()}{getMovies()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1a3mdef_1_1_movie_view_model_a83554355fcdf626a4701aaee2304fc15} 
+Live\+Data$<$ List$<$ \mbox{\hyperlink{classcom_1_1example_1_1a3mdef_1_1modelos_1_1_movie}{Movie}} $>$ $>$ com.\+example.\+a3mdef.\+Movie\+View\+Model.\+get\+Movies (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Devuelve la lista de películas observada.
+
+\begin{DoxyReturn}{Returns}
+Un objeto Live\+Data que contiene una lista de películas. 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1example_1_1a3mdef_1_1_movie_view_model_afa5dec643c75ac3b14db0a03b66e0f8f}\index{com.example.a3mdef.MovieViewModel@{com.example.a3mdef.MovieViewModel}!setErrorMessage@{setErrorMessage}}
+\index{setErrorMessage@{setErrorMessage}!com.example.a3mdef.MovieViewModel@{com.example.a3mdef.MovieViewModel}}
+\doxysubsubsection{\texorpdfstring{setErrorMessage()}{setErrorMessage()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1a3mdef_1_1_movie_view_model_afa5dec643c75ac3b14db0a03b66e0f8f} 
+void com.\+example.\+a3mdef.\+Movie\+View\+Model.\+set\+Error\+Message (\begin{DoxyParamCaption}\item[{String}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Establece el mensaje de error.
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & El mensaje de error a establecer. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classcom_1_1example_1_1a3mdef_1_1_movie_view_model_a1569a5e4fde4589aec6d6ecfe18ac801}\index{com.example.a3mdef.MovieViewModel@{com.example.a3mdef.MovieViewModel}!setMovies@{setMovies}}
+\index{setMovies@{setMovies}!com.example.a3mdef.MovieViewModel@{com.example.a3mdef.MovieViewModel}}
+\doxysubsubsection{\texorpdfstring{setMovies()}{setMovies()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1a3mdef_1_1_movie_view_model_a1569a5e4fde4589aec6d6ecfe18ac801} 
+void com.\+example.\+a3mdef.\+Movie\+View\+Model.\+set\+Movies (\begin{DoxyParamCaption}\item[{List$<$ \mbox{\hyperlink{classcom_1_1example_1_1a3mdef_1_1modelos_1_1_movie}{Movie}} $>$}]{movies}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Establece la lista de películas.
+
+
+\begin{DoxyParams}{Parameters}
+{\em movies} & La lista de películas a establecer. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+app/src/main/java/com/example/a3mdef/Movie\+View\+Model.\+java\end{DoxyCompactItemize}

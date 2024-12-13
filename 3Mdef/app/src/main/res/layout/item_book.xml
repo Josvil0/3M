@@ -1,59 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:elevation="6dp"
-    android:radius="12dp"
-    android:background="?android:attr/selectableItemBackground">
+    android:orientation="horizontal"
+    android:padding="16dp">
 
+    <!-- Imagen de portada -->
+    <ImageView
+        android:id="@+id/bookCoverImageView"
+        android:layout_width="80dp"
+        android:layout_height="120dp"
+        android:layout_marginEnd="16dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/default_image"/>
+
+    <!-- Título y Autor -->
     <LinearLayout
-        android:orientation="horizontal"
-        android:padding="16dp"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical">
-
-        <!-- Imagen del libro -->
-        <ImageView
-            android:id="@+id/bookImageView"
-            android:layout_width="100dp"
-            android:layout_height="150dp"
-            android:src="@drawable/default_image"
-            android:scaleType="centerCrop"
-            android:clipToOutline="true"
-            android:layout_gravity="center_vertical"/>
-
-        <!-- Contenido textual -->
-        <LinearLayout
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/bookTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingStart="16dp"
-            android:layout_gravity="center_vertical">
-
-            <!-- Título del libro -->
-            <TextView
-                android:id="@+id/titleTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Book Title"
-                android:textSize="18sp"
-                android:textColor="#212121"
-                android:ellipsize="end"
-                android:maxLines="1"/>
-
-            <!-- Autor del libro -->
-            <TextView
-                android:id="@+id/authorTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Author"
-                android:textSize="14sp"
-                android:textColor="#757575"
-                android:layout_marginTop="4dp"
-                android:ellipsize="end"
-                android:maxLines="1"/>
-        </LinearLayout>
+            android:text="Título del libro"
+            android:textStyle="bold"
+            android:textSize="18sp"/>
+        <TextView
+            android:id="@+id/bookAuthors"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Autor(s)"
+            android:textSize="14sp"/>
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+
+</LinearLayout>

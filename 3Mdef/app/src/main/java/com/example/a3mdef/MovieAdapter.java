@@ -12,68 +12,125 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.a3mdef.modelos.Movie;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
+/**
+ * Adapter para el RecyclerView que gestiona la visualización de una lista de películas.
+ * Esta clase es responsable de crear las vistas para cada elemento en la lista, enlazarlas con los datos
+ * de las películas y manejar los clics en los ítems.
+ */
+public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
 
-    private List<Movie> movies;
+    private List<Movie> movies;  // Lista de películas a mostrar
+    private final OnItemClickListener listener;  // Interfaz para manejar el clic en un ítem
 
-    // Constructor que inicializa la lista de películas.
-    public MovieAdapter(List<Movie> movies) {
-        this.movies = movies;
+    /**
+     * Interfaz que define el comportamiento al hacer clic en un ítem de la lista.
+     */
+    public interface OnItemClickListener {
+        /**
+         * Método llamado cuando un ítem de la lista es clickeado.
+         *
+         * @param movie La película clickeada.
+         */
+        void onItemClick(Movie movie);
     }
 
-    // Crea el ViewHolder para cada elemento del RecyclerView.
+    /**
+     * Constructor del adaptador.
+     *
+     * @param movies   Lista de películas que se mostrarán.
+     * @param listener Listener que maneja el clic en un ítem.
+     */
+    public MovieAdapter(List<Movie> movies, OnItemClickListener listener) {
+        this.movies = movies != null ? movies : new ArrayList<>();  // Asegura que la lista no sea null
+        this.listener = listener;
+    }
+
+    /**
+     * Actualiza la lista de películas a mostrar en el RecyclerView.
+     *
+     * @param newMovies Nueva lista de películas.
+     */
+    public void setMovies(List<Movie> newMovies) {
+        this.movies = newMovies != null ? newMovies : new ArrayList<>();
+        notifyDataSetChanged();  // Notifica al RecyclerView que los datos han cambiado
+    }
+
+    /**
+     * Crea y devuelve una nueva instancia de ViewHolder.
+     * Este método infla el layout para cada ítem de la lista.
+     *
+     * @param parent El contenedor donde se va a agregar la vista.
+     * @param viewType Tipo de vista (en este caso, no se usa, ya que hay solo un tipo de ítem).
+     * @return Un nuevo ViewHolder.
+     */
     @NonNull
     @Override
-    public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Infla el layout del item (cada película) para ser usado en el RecyclerView.
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_movie, parent, false);
-        return new MovieViewHolder(view);  // Devuelve el ViewHolder con el layout inflado.
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_tmdb, parent, false);
+        return new ViewHolder(view);
     }
 
-    // Asocia los datos del modelo (Movie) al ViewHolder.
+    /**
+     * Asocia los datos de una película a las vistas de un ítem.
+     * Este método es llamado cuando el RecyclerView necesita mostrar un ítem en pantalla.
+     *
+     * @param holder El ViewHolder que contiene las vistas.
+     * @param position La posición del ítem en la lista.
+     */
     @Override
-    public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
-        // Obtiene la película en la posición actual.
-        Movie movie = movies.get(position);
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Movie movie = movies.get(position);  // Obtiene la película en la posición correspondiente
 
-        // Establece el título de la película
+        // Asigna el título de la película al TextView
         holder.titleTextView.setText(movie.getTitle());
-        // Obtiene la URL de la imagen  de la película.
-        String posterPath = movie.getPosterPath();
 
-        if (posterPath != null && !posterPath.isEmpty()) {
-            // Si el posterPath no es nulo ni vacío, forma la URL completa para cargar la imagen.
-            String posterUrl = "https://image.tmdb.org/t/p/w500" + posterPath;
-            Glide.with(holder.posterImageView.getContext())
-                    .load(posterUrl)  // Carga la URL de la imagen.
-                    .placeholder(R.drawable.default_image)  // Muestra una imagen por defecto mientras carga.
-                    .into(holder.posterImageView);  // Coloca la imagen en el ImageView.
-        } else {
-            // Si no hay URL del poster, carga una imagen por defecto.
-            Glide.with(holder.posterImageView.getContext())
-                    .load(R.drawable.default_image)  // Imagen predeterminada si no hay URL de la película.
-                    .into(holder.posterImageView);
-        }
+        // Carga la imagen del póster usando Glide
+        String imageUrl = "https://image.tmdb.org/t/p/w500" + movie.getPosterPath();
+        Glide.with(holder.itemView.getContext())
+                .load(imageUrl)
+                .placeholder(R.drawable.default_image)  // Imagen por defecto mientras se carga
+                .into(holder.posterImageView);
+
+        // Configura el listener para manejar el clic en el ítem
+        holder.itemView.setOnClickListener(v -> listener.onItemClick(movie));
     }
 
-    // Devuelve el número total de elementos en la lista (cuántas películas mostrar).
+    /**
+     * Devuelve la cantidad de ítems en la lista de películas.
+     *
+     * @return El número de ítems en la lista.
+     */
     @Override
     public int getItemCount() {
-        return movies.size();  // Devuelve la cantidad de películas en la lista.
+        return movies != null ? movies.size() : 0;  // Devuelve el tamaño de la lista
     }
 
-    // Clase interna para representar un elemento del RecyclerView.
-    static class MovieViewHolder extends RecyclerView.ViewHolder {
-        TextView titleTextView;  // TextView para el título de la película.
-        ImageView posterImageView;  // ImageView para el poster de la película.
+    /**
+     * ViewHolder que contiene las vistas de un ítem de la lista.
+     * Este ViewHolder mantiene las referencias a los elementos de la interfaz.
+     */
+    static class ViewHolder extends RecyclerView.ViewHolder {
+        /**
+         * The Title text view.
+         */
+        TextView titleTextView;  // Vista para mostrar el título de la película
+        /**
+         * The Poster image view.
+         */
+        ImageView posterImageView;  // Vista para mostrar la imagen del póster
 
-        // Constructor que inicializa los componentes del ViewHolder.
-        public MovieViewHolder(@NonNull View itemView) {
+        /**
+         * Constructor del ViewHolder.
+         *
+         * @param itemView La vista del ítem (el layout inflado para este ViewHolder).
+         */
+        ViewHolder(View itemView) {
             super(itemView);
-            titleTextView = itemView.findViewById(R.id.titleTextView);  // Inicializa el TextView para el título.
-            posterImageView = itemView.findViewById(R.id.posterImageView);  // Inicializa el ImageView para el poster.
+            titleTextView = itemView.findViewById(R.id.title);
+            posterImageView = itemView.findViewById(R.id.posterImageView);
         }
     }
 }

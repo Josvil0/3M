@@ -1,0 +1,64 @@
+\doxysection{com.\+example.\+a3mdef.\+Movies\+Fragment Class Reference}
+\hypertarget{classcom_1_1example_1_1a3mdef_1_1_movies_fragment}{}\label{classcom_1_1example_1_1a3mdef_1_1_movies_fragment}\index{com.example.a3mdef.MoviesFragment@{com.example.a3mdef.MoviesFragment}}
+Inheritance diagram for com.\+example.\+a3mdef.\+Movies\+Fragment\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classcom_1_1example_1_1a3mdef_1_1_movies_fragment}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+View \mbox{\hyperlink{classcom_1_1example_1_1a3mdef_1_1_movies_fragment_aab3e824037c2a9f113a1ec4cc57050bf}{on\+Create\+View}} (@Non\+Null Layout\+Inflater inflater, @Nullable View\+Group container, @Nullable Bundle saved\+Instance\+State)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Fragmento que muestra una lista de películas obtenidas desde la API, utilizando un Recycler\+View. Permite realizar búsquedas de películas a través de un Search\+View. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcom_1_1example_1_1a3mdef_1_1_movies_fragment_aab3e824037c2a9f113a1ec4cc57050bf}\index{com.example.a3mdef.MoviesFragment@{com.example.a3mdef.MoviesFragment}!onCreateView@{onCreateView}}
+\index{onCreateView@{onCreateView}!com.example.a3mdef.MoviesFragment@{com.example.a3mdef.MoviesFragment}}
+\doxysubsubsection{\texorpdfstring{onCreateView()}{onCreateView()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1a3mdef_1_1_movies_fragment_aab3e824037c2a9f113a1ec4cc57050bf} 
+View com.\+example.\+a3mdef.\+Movies\+Fragment.\+on\+Create\+View (\begin{DoxyParamCaption}\item[{@Non\+Null Layout\+Inflater}]{inflater}{, }\item[{@Nullable View\+Group}]{container}{, }\item[{@Nullable Bundle}]{saved\+Instance\+State}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Inflar la vista del fragmento y configurar los elementos de la interfaz.
+
+
+\begin{DoxyParams}{Parameters}
+{\em inflater} & El inflador de la vista. \\
+\hline
+{\em container} & El contenedor en el que se añadirá la vista. \\
+\hline
+{\em saved\+Instance\+State} & El estado guardado del fragmento (si existe). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+La vista inflada del fragmento. 
+\end{DoxyReturn}
+Cuando el usuario envía un texto de búsqueda, se realiza la búsqueda de películas.
+
+
+\begin{DoxyParams}{Parameters}
+{\em query} & El texto ingresado por el usuario. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+false para permitir la acción predeterminada.
+\end{DoxyReturn}
+Cuando el texto en el Search\+View cambia, se realiza una búsqueda de películas si la longitud del texto es mayor que 2 caracteres.
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Text} & El texto que el usuario está escribiendo. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+false para permitir la acción predeterminada.
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+app/src/main/java/com/example/a3mdef/Movies\+Fragment.\+java\end{DoxyCompactItemize}

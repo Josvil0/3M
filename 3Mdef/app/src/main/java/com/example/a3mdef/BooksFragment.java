@@ -10,94 +10,141 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.appcompat.widget.SearchView;  // Correcto, debe ser de androidx.appcompat.widget
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a3mdef.modelos.Book;
-import com.example.a3mdef.servicios.GoogleBooksApi;
-import com.example.a3mdef.servicios.RetrofitClient;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
+/**
+ * Fragmento que muestra una lista de libros y permite buscar libros a través de un campo de búsqueda.
+ * Al seleccionar un libro, se muestra su detalle en un fragmento separado.
+ */
 public class BooksFragment extends Fragment {
 
-    private RecyclerView recyclerView;  // RecyclerView para mostrar los libros
-    private BookAdapter bookAdapter;  // Adaptador para los libros
-    private androidx.appcompat.widget.SearchView searchView;  // Barra de búsqueda para filtrar libros
+    private RecyclerView recyclerView;
+    private BookAdapter bookAdapter;
+    private BookViewModel bookViewModel;
 
-    @Nullable
+    /**
+     * Se ejecuta cuando se crea el fragmento.
+     * Asegura que el fragmento no se destruya al cambiar de fragmento.
+     * @param savedInstanceState El estado guardado de la instancia, si está disponible.
+     */
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // Inflar el layout del fragmento
-        View view = inflater.inflate(R.layout.fragment_books, container, false);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);  // Asegura que el fragmento no se destruya al cambiar de fragmento
+    }
 
-        // Inicializar RecyclerView y SearchView
+    /**
+     * Se ejecuta cuando se crea la vista del fragmento.
+     * Infla el layout y prepara las vistas para mostrar la lista de libros y el campo de búsqueda.
+     * @param inflater El objeto LayoutInflater para inflar la vista.
+     * @param container El contenedor en el que se colocará la vista.
+     * @param savedInstanceState El estado guardado de la instancia, si está disponible.
+     * @return La vista inflada que representa el contenido del fragmento.
+     */
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_books, container, false);
+    }
+
+    /**
+     * Se ejecuta después de que la vista ha sido creada.
+     * Inicializa las vistas, el adaptador de la lista de libros y configura la búsqueda.
+     * También observa los cambios en la lista de libros para actualizar la vista.
+     * @param view La vista creada en onCreateView().
+     * @param savedInstanceState El estado guardado de la instancia, si está disponible.
+     */
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Inicializar el ViewModel que contiene la lógica de los libros
+        bookViewModel = new ViewModelProvider(requireActivity()).get(BookViewModel.class);
+
+        // Inicializar RecyclerView y su adaptador
         recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));  // Configura el LayoutManager del RecyclerView
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        searchView = view.findViewById(R.id.searchView);  // Asigna la barra de búsqueda al SearchView
-        searchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
+        // Inicializar el adaptador vacío solo una vez
+        if (bookAdapter == null) {
+            bookAdapter = new BookAdapter();
+            recyclerView.setAdapter(bookAdapter);
+        }
+
+        // Observar los cambios en la lista de libros desde el ViewModel
+        bookViewModel.getBooks().observe(getViewLifecycleOwner(), books -> {
+            if (books != null && !books.isEmpty()) {
+                Log.d("BooksFragment", "Libros obtenidos: " + books.size());
+                bookAdapter.setBooks(books);  // Actualiza la lista de libros
+            } else {
+                Log.d("BooksFragment", "No se encontraron libros.");
+                bookAdapter.setBooks(new ArrayList<>());  // Si no hay libros, pasar una lista vacía
+                Toast.makeText(getContext(), "No se encontraron libros", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Configuración del click sobre un libro
+        bookAdapter.setOnItemClickListener(book -> {
+            // Llamar al método para mostrar el detalle del libro
+            showBookDetailFragment(book);
+        });
+
+        // Configuración del SearchView para buscar libros
+        SearchView searchView = view.findViewById(R.id.searchView);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                // Se ejecuta cuando se envía el texto de búsqueda
-                searchBooks(query);  // Llamar a la función de búsqueda con el término ingresado
+                // Llamar al método de búsqueda en el ViewModel con el texto ingresado
+                Log.d("BooksFragment", "Buscando libros con: " + query);
+                bookViewModel.searchBooks(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                // Puedes implementar búsqueda en tiempo real si es necesario
                 return false;
             }
         });
-
-        return view;  // Retorna la vista inflada
     }
 
-    // Método para realizar la búsqueda de libros a través de la API de Google Books
-    private void searchBooks(String query) {
-        // Verificar si el término de búsqueda está vacío
-        if (query.isEmpty()) {
-            Toast.makeText(getContext(), "Introduce un término de búsqueda", Toast.LENGTH_SHORT).show();
-            return;
+    /**
+     * Muestra un fragmento con los detalles del libro seleccionado.
+     * @param book El libro que se seleccionó para mostrar su detalle.
+     */
+    private void showBookDetailFragment(Book book) {
+        // Crear un nuevo fragmento para mostrar los detalles del libro
+        BookDetailFragment bookDetailFragment = new BookDetailFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("book", book);  // Pasar el libro como argumento al fragmento
+        bookDetailFragment.setArguments(bundle);
+
+        // Realizar la transacción para mostrar el fragmento
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.fragmentContainer, bookDetailFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    /**
+     * Se ejecuta cuando el fragmento es visible.
+     * Aquí se actualiza la lista de libros si ha habido cambios en el ViewModel.
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Verificar si la lista de libros ha cambiado y actualizar el adaptador
+        List<Book> currentBooks = bookViewModel.getBooks().getValue();
+        if (currentBooks != null) {
+            bookAdapter.setBooks(currentBooks);  // Asegúrate de notificar el cambio
+            bookAdapter.notifyDataSetChanged();  // Forzar actualización visual
         }
-
-        // Crear una instancia del servicio de Google Books API
-        GoogleBooksApi api = RetrofitClient.getGoogleBooksRetrofitInstance().create(GoogleBooksApi.class);
-        // Llamar a la API de Google Books con el término de búsqueda
-        Call<GoogleBooksResponse> call = api.searchBooks(query);
-
-        // Realizar la llamada asíncrona a la API
-        call.enqueue(new Callback<GoogleBooksResponse>() {
-            @Override
-            public void onResponse(Call<GoogleBooksResponse> call, Response<GoogleBooksResponse> response) {
-                // Manejar la respuesta exitosa de la API
-                if (response.isSuccessful() && response.body() != null) {
-                    List<Book> books = response.body().getItems();  // Obtener los libros de la respuesta
-                    if (books != null && !books.isEmpty()) {
-                        // Si se encuentran libros, configurar el adaptador
-                        bookAdapter = new BookAdapter(books);
-                        recyclerView.setAdapter(bookAdapter);  // Asignar el adaptador al RecyclerView
-                    } else {
-                        // Si no se encuentran libros, mostrar un mensaje
-                        Toast.makeText(getContext(), "No se encontraron libros", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    // Si la respuesta de la API no es exitosa
-                    Toast.makeText(getContext(), "Error al buscar libros", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<GoogleBooksResponse> call, Throwable t) {
-                // Manejar error de conexión
-                Log.e("API Error", t.getMessage());  // Loguear el error
-                Toast.makeText(getContext(), "Error de red", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 }

@@ -8,7 +8,17 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 
+/**
+ * The interface Spotify auth service.
+ */
 public interface SpotifyAuthService {
+    /**
+     * Gets access token.
+     *
+     * @param authorizationHeader the authorization header
+     * @param grantType           the grant type
+     * @return the access token
+     */
     @POST("api/token")
     @FormUrlEncoded
     Call<SpotifyToken> getAccessToken(

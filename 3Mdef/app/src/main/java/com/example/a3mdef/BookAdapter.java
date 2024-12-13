@@ -12,85 +12,166 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.a3mdef.modelos.Book;
+import com.example.a3mdef.modelos.BookInfo;
 
+import java.util.ArrayList;
 import java.util.List;
 
-// Adaptador para mostrar una lista de libros en un RecyclerView
+/**
+ * Adapter que gestiona la visualización de una lista de libros en un RecyclerView.
+ * Cada libro se muestra con su título, autor y portada.
+ */
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
 
-    private List<Book> books;  // Lista que contiene los libros
+    // Lista de libros que se mostrarán
+    private List<Book> books = new ArrayList<>();
+    // Listener para manejar los clics sobre los elementos de la lista
+    private OnItemClickListener listener;
 
-    // Constructor que recibe la lista de libros
-    public BookAdapter(List<Book> books) {
-        this.books = books;
+    /**
+     * Interface para manejar los clics sobre un libro.
+     */
+    public interface OnItemClickListener {
+        /**
+         * Método que se llama cuando un libro es seleccionado.
+         *
+         * @param book El libro que fue clickeado.
+         */
+        void onItemClick(Book book);
     }
 
-    // Método que infla el layout del item y devuelve un ViewHolder
+    /**
+     * Constructor vacío del adaptador.
+     */
+    public BookAdapter() {
+        // Constructor vacío
+    }
+
+    /**
+     * Establece el listener para los clics sobre los items.
+     *
+     * @param listener El listener a asignar.
+     */
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
+    /**
+     * Actualiza la lista de libros que se mostrarán en el RecyclerView.
+     *
+     * @param books Lista de libros a mostrar.
+     */
+    public void setBooks(List<Book> books) {
+        if (books != null) {
+            Log.d("BookAdapter", "Recibiendo " + books.size() + " libros.");
+            this.books = books;
+        } else {
+            Log.d("BookAdapter", "Recibiendo lista vacía.");
+            this.books = new ArrayList<>();
+        }
+        notifyDataSetChanged(); // Notifica que los datos han cambiado
+    }
+
+    /**
+     * Infla el layout de cada item y lo convierte en un ViewHolder.
+     * @param parent El contenedor de vistas en el que se insertará el item.
+     * @param viewType El tipo de vista del item.
+     * @return Un nuevo ViewHolder.
+     */
     @NonNull
     @Override
     public BookViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Inflar el layout item_book para cada item del RecyclerView
+        // Inflamos el layout 'item_book' para cada elemento de la lista
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_book, parent, false);
-        return new BookViewHolder(view);  // Crear y devolver un ViewHolder con el layout inflado
+        return new BookViewHolder(view); // Retornamos el nuevo ViewHolder con el item inflado
     }
 
-    // Método que asigna los datos de un libro a las vistas de cada item
+    /**
+     * Asocia los datos del libro con la vista correspondiente.
+     * @param holder El ViewHolder que contiene las vistas del item.
+     * @param position La posición del libro en la lista.
+     */
     @Override
     public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
-        // Obtener el libro de la lista en la posición actual
+        // Obtenemos el libro en la posición actual
         Book book = books.get(position);
+        // Obtenemos la información del libro (título, autores, imagen)
+        BookInfo info = book.getVolumeInfo();
 
-        // Asignar el título del libro al TextView correspondiente
-        holder.titleTextView.setText(book.getVolumeInfo().getTitle());
+        // Establecemos el título del libro en el TextView correspondiente
+        holder.bookTitle.setText(info.getTitle());
+        // Establecemos los autores (si están disponibles), si no, mostramos "Autor desconocido"
+        holder.bookAuthors.setText(info.getAuthors() != null && !info.getAuthors().isEmpty() ?
+                String.join(", ", info.getAuthors()) : "Autor desconocido");
 
-        // Obtener y mostrar el primer autor del libro
-        List<String> authors = book.getVolumeInfo().getAuthors();
-        if (authors != null && !authors.isEmpty()) {
-            holder.authorTextView.setText(authors.get(0));  // Mostrar solo el primer autor
-        } else {
-            holder.authorTextView.setText("Autor desconocido");  // Si no hay autor, mostrar mensaje por defecto
-        }
-
-        // Obtener la URL de la imagen del libro (portada)
+        // Establecemos la imagen del libro, buscando primero una imagen grande y luego una más pequeña si no está disponible
         String imageUrl = null;
-        if (book.getVolumeInfo().getImageLinks() != null) {
-            imageUrl = book.getVolumeInfo().getImageLinks().getThumbnail();  // Obtener la URL de la imagen en miniatura
+        if (info.getImageLinks() != null) {
+            imageUrl = info.getImageLinks().getLarge();
+            if (imageUrl == null) {
+                imageUrl = info.getImageLinks().getMedium();
+            }
+            if (imageUrl == null) {
+                imageUrl = info.getImageLinks().getSmall();
+            }
+            if (imageUrl == null) {
+                imageUrl = info.getImageLinks().getThumbnail();
+            }
         }
 
-        // Log para depuración, muestra la URL de la imagen
-        Log.d("BookAdapter", "Image URL: " + imageUrl);
-
-        // Usar Glide para cargar la imagen en el ImageView
-        if (imageUrl != null && !imageUrl.isEmpty()) {
-            // Si la URL es válida, cargar la imagen con Glide y redimensionarla
-            Glide.with(holder.bookImageView.getContext())
-                    .load(imageUrl)
-                    .override(150, 200)  // Establecer el tamaño de la imagen
-                    .into(holder.bookImageView);  // Cargar la imagen en el ImageView
-        } else {
-            // Si no hay URL de imagen, mostrar una imagen por defecto
-            holder.bookImageView.setImageResource(R.drawable.default_image);
+        // Usamos Glide para cargar la imagen en el ImageView del libro
+        if (imageUrl != null) {
+            Glide.with(holder.itemView.getContext())
+                    .load(imageUrl) // Cargamos la URL de la imagen
+                    .into(holder.bookImage); // Establecemos la imagen en el ImageView
         }
+
+        // Detectamos el clic en el item del RecyclerView
+        holder.itemView.setOnClickListener(v -> {
+            // Si el listener no es null, se llama al método onItemClick con el libro seleccionado
+            if (listener != null) {
+                listener.onItemClick(book);
+            }
+        });
     }
 
-    // Método que devuelve el número total de items (libros) en la lista
+    /**
+     * Retorna el número de elementos en la lista de libros.
+     * @return El número de libros.
+     */
     @Override
     public int getItemCount() {
-        return books.size();  // Número total de libros en la lista
+        return books != null ? books.size() : 0;
     }
 
-    // Clase ViewHolder para contener las vistas de cada item
+    /**
+     * ViewHolder que contiene las vistas del item en el RecyclerView.
+     */
     public static class BookViewHolder extends RecyclerView.ViewHolder {
-        TextView titleTextView;     // Vista para mostrar el título del libro
-        TextView authorTextView;    // Vista para mostrar el autor del libro
-        ImageView bookImageView;    // Vista para mostrar la imagen de la portada del libro
+        /**
+         * The Book title.
+         */
+// Los componentes que forman cada item: título, autores e imagen del libro
+        TextView bookTitle, /**
+         * The Book authors.
+         */
+        bookAuthors;
+        /**
+         * The Book image.
+         */
+        ImageView bookImage;
 
-        // Constructor que inicializa las vistas del item
+        /**
+         * Constructor del ViewHolder.
+         *
+         * @param itemView La vista que contiene el item.
+         */
         public BookViewHolder(@NonNull View itemView) {
             super(itemView);
-            titleTextView = itemView.findViewById(R.id.titleTextView);  // Asignar la vista del título
-            authorTextView = itemView.findViewById(R.id.authorTextView);  // Asignar la vista del autor
-            bookImageView = itemView.findViewById(R.id.bookImageView);    // Asignar la vista de la imagen del libro
+            // Asignamos los componentes a las vistas correspondientes en el layout
+            bookTitle = itemView.findViewById(R.id.bookTitle);
+            bookAuthors = itemView.findViewById(R.id.bookAuthors);
+            bookImage = itemView.findViewById(R.id.bookCoverImageView);
         }
     }
 }

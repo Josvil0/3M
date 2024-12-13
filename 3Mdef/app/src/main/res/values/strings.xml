@@ -2,4 +2,5 @@
     <string name="app_name">3M def</string>
     <string name="spotify_client_id">e0581f8e64bb46f989d15491a1d87952</string>
     <string name="spotify_client_secret">253e86e7b45b4e75b3e11de45cb35484</string>
+    <string name="tmdb_api_key">38d68f606cbdd06f61403a6c6e40a548</string>
 </resources>

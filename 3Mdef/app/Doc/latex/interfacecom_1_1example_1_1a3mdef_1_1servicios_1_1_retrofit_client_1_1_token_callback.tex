@@ -1,0 +1,46 @@
+\doxysection{com.\+example.\+a3mdef.\+servicios.\+Retrofit\+Client.\+Token\+Callback Interface Reference}
+\hypertarget{interfacecom_1_1example_1_1a3mdef_1_1servicios_1_1_retrofit_client_1_1_token_callback}{}\label{interfacecom_1_1example_1_1a3mdef_1_1servicios_1_1_retrofit_client_1_1_token_callback}\index{com.example.a3mdef.servicios.RetrofitClient.TokenCallback@{com.example.a3mdef.servicios.RetrofitClient.TokenCallback}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{interfacecom_1_1example_1_1a3mdef_1_1servicios_1_1_retrofit_client_1_1_token_callback_a31f5408ad8aaae3102225526697bf077}{on\+Token\+Received}} (String access\+Token)
+\item 
+void \mbox{\hyperlink{interfacecom_1_1example_1_1a3mdef_1_1servicios_1_1_retrofit_client_1_1_token_callback_a3b1e540ee2631246cae30e8f9925ca16}{on\+Error}} (String error)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interfaz para recibir el token de acceso de Spotify. Implementa métodos para manejar el éxito y el error en la obtención del token. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{interfacecom_1_1example_1_1a3mdef_1_1servicios_1_1_retrofit_client_1_1_token_callback_a3b1e540ee2631246cae30e8f9925ca16}\index{com.example.a3mdef.servicios.RetrofitClient.TokenCallback@{com.example.a3mdef.servicios.RetrofitClient.TokenCallback}!onError@{onError}}
+\index{onError@{onError}!com.example.a3mdef.servicios.RetrofitClient.TokenCallback@{com.example.a3mdef.servicios.RetrofitClient.TokenCallback}}
+\doxysubsubsection{\texorpdfstring{onError()}{onError()}}
+{\footnotesize\ttfamily \label{interfacecom_1_1example_1_1a3mdef_1_1servicios_1_1_retrofit_client_1_1_token_callback_a3b1e540ee2631246cae30e8f9925ca16} 
+void com.\+example.\+a3mdef.\+servicios.\+Retrofit\+Client.\+Token\+Callback.\+on\+Error (\begin{DoxyParamCaption}\item[{String}]{error}{}\end{DoxyParamCaption})}
+
+Método llamado cuando ocurre un error al obtener el token de acceso.
+
+
+\begin{DoxyParams}{Parameters}
+{\em error} & El mensaje de error. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{interfacecom_1_1example_1_1a3mdef_1_1servicios_1_1_retrofit_client_1_1_token_callback_a31f5408ad8aaae3102225526697bf077}\index{com.example.a3mdef.servicios.RetrofitClient.TokenCallback@{com.example.a3mdef.servicios.RetrofitClient.TokenCallback}!onTokenReceived@{onTokenReceived}}
+\index{onTokenReceived@{onTokenReceived}!com.example.a3mdef.servicios.RetrofitClient.TokenCallback@{com.example.a3mdef.servicios.RetrofitClient.TokenCallback}}
+\doxysubsubsection{\texorpdfstring{onTokenReceived()}{onTokenReceived()}}
+{\footnotesize\ttfamily \label{interfacecom_1_1example_1_1a3mdef_1_1servicios_1_1_retrofit_client_1_1_token_callback_a31f5408ad8aaae3102225526697bf077} 
+void com.\+example.\+a3mdef.\+servicios.\+Retrofit\+Client.\+Token\+Callback.\+on\+Token\+Received (\begin{DoxyParamCaption}\item[{String}]{access\+Token}{}\end{DoxyParamCaption})}
+
+Método llamado cuando se recibe el token de acceso exitosamente.
+
+
+\begin{DoxyParams}{Parameters}
+{\em access\+Token} & El token de acceso de Spotify. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+app/src/main/java/com/example/a3mdef/servicios/Retrofit\+Client.\+java\end{DoxyCompactItemize}

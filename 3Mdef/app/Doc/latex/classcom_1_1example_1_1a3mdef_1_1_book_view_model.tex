@@ -1,0 +1,50 @@
+\doxysection{com.\+example.\+a3mdef.\+Book\+View\+Model Class Reference}
+\hypertarget{classcom_1_1example_1_1a3mdef_1_1_book_view_model}{}\label{classcom_1_1example_1_1a3mdef_1_1_book_view_model}\index{com.example.a3mdef.BookViewModel@{com.example.a3mdef.BookViewModel}}
+Inheritance diagram for com.\+example.\+a3mdef.\+Book\+View\+Model\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classcom_1_1example_1_1a3mdef_1_1_book_view_model}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+Live\+Data$<$ List$<$ \mbox{\hyperlink{classcom_1_1example_1_1a3mdef_1_1modelos_1_1_book}{Book}} $>$ $>$ \mbox{\hyperlink{classcom_1_1example_1_1a3mdef_1_1_book_view_model_a505b5b0175784e55bb916ff459d8136d}{get\+Books}} ()
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1a3mdef_1_1_book_view_model_ab8e5b4bae3df48f9f451a0deadd4198a}{search\+Books}} (String query)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+View\+Model encargado de gestionar la lógica para obtener y almacenar los libros desde la API de Google Books. Proporciona los datos a los fragmentos y actividades que lo observen. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcom_1_1example_1_1a3mdef_1_1_book_view_model_a505b5b0175784e55bb916ff459d8136d}\index{com.example.a3mdef.BookViewModel@{com.example.a3mdef.BookViewModel}!getBooks@{getBooks}}
+\index{getBooks@{getBooks}!com.example.a3mdef.BookViewModel@{com.example.a3mdef.BookViewModel}}
+\doxysubsubsection{\texorpdfstring{getBooks()}{getBooks()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1a3mdef_1_1_book_view_model_a505b5b0175784e55bb916ff459d8136d} 
+Live\+Data$<$ List$<$ \mbox{\hyperlink{classcom_1_1example_1_1a3mdef_1_1modelos_1_1_book}{Book}} $>$ $>$ com.\+example.\+a3mdef.\+Book\+View\+Model.\+get\+Books (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Obtiene un objeto Live\+Data que contiene la lista de libros. Los fragmentos y actividades pueden observar este Live\+Data para recibir actualizaciones cuando la lista cambie.
+
+\begin{DoxyReturn}{Returns}
+Live\+Data que contiene la lista de libros. 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1example_1_1a3mdef_1_1_book_view_model_ab8e5b4bae3df48f9f451a0deadd4198a}\index{com.example.a3mdef.BookViewModel@{com.example.a3mdef.BookViewModel}!searchBooks@{searchBooks}}
+\index{searchBooks@{searchBooks}!com.example.a3mdef.BookViewModel@{com.example.a3mdef.BookViewModel}}
+\doxysubsubsection{\texorpdfstring{searchBooks()}{searchBooks()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1a3mdef_1_1_book_view_model_ab8e5b4bae3df48f9f451a0deadd4198a} 
+void com.\+example.\+a3mdef.\+Book\+View\+Model.\+search\+Books (\begin{DoxyParamCaption}\item[{String}]{query}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Realiza la búsqueda de libros en la API de Google Books utilizando un término de búsqueda. Una vez obtenida la respuesta, actualiza la lista de libros.
+
+
+\begin{DoxyParams}{Parameters}
+{\em query} & El término de búsqueda para encontrar libros. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+app/src/main/java/com/example/a3mdef/Book\+View\+Model.\+java\end{DoxyCompactItemize}

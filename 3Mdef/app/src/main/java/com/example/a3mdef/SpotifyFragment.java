@@ -29,44 +29,58 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-// Fragmento para la búsqueda de música que se conecta a la API de Spotify y muestra los resultados.
+/**
+ * Fragmento para la búsqueda de música que se conecta a la API de Spotify y muestra los resultados.
+ * Permite a los usuarios buscar artistas, álbumes y canciones mediante un término de búsqueda.
+ */
 public class SpotifyFragment extends Fragment {
 
-    private SearchView searchView;  // SearchView donde el usuario ingresa el término de búsqueda
-    private RecyclerView resultsRecyclerView;  // RecyclerView donde se mostrarán los resultados de la búsqueda
-    private SpotifyAdapter adapter;  // Adaptador para mostrar los resultados en el RecyclerView
+    private SearchView searchView;  // SearchView donde el usuario ingresa el término de búsqueda.
+    private RecyclerView resultsRecyclerView;  // RecyclerView donde se mostrarán los resultados de la búsqueda.
+    private SpotifyAdapter adapter;  // Adaptador para mostrar los resultados en el RecyclerView.
 
-    // Constructor vacío, se utiliza para la creación del fragmento
+    /**
+     * Constructor vacío del fragmento.
+     * Este constructor se utiliza cuando se crea una nueva instancia del fragmento.
+     */
     public SpotifyFragment() {
-        // Constructor vacío
+        // Constructor vacío.
     }
 
-    // Este método se llama cuando el fragmento se crea y se infla en la vista.
+    /**
+     * Este método se llama cuando el fragmento se crea y se infla en la vista.
+     * Aquí se inicializan las vistas y se configura la lógica de la búsqueda.
+     *
+     * @param inflater LayoutInflater para inflar el layout.
+     * @param container El contenedor que albergará el fragmento.
+     * @param savedInstanceState Datos guardados del estado previo del fragmento.
+     * @return La vista inflada del fragmento.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflamos el layout
+        // Inflamos el layout del fragmento.
         View view = inflater.inflate(R.layout.fragment_music_search, container, false);
 
-        // Inicializamos las vistas de búsqueda y RecyclerView
-        searchView = view.findViewById(R.id.search_edit_text);  // Asigna el SearchView
-        resultsRecyclerView = view.findViewById(R.id.results_recycler_view);  // Asigna el RecyclerView
+        // Inicializamos las vistas del fragmento.
+        searchView = view.findViewById(R.id.search_edit_text);  // Asigna el SearchView desde el layout.
+        resultsRecyclerView = view.findViewById(R.id.results_recycler_view);  // Asigna el RecyclerView.
 
-        // Configuración del RecyclerView
-        resultsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new SpotifyAdapter();  // Inicializamos el adaptador
-        resultsRecyclerView.setAdapter(adapter);  // Establecemos el adaptador al RecyclerView
+        // Configuración del RecyclerView.
+        resultsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));  // Configura el LayoutManager.
+        adapter = new SpotifyAdapter();  // Inicializa el adaptador.
+        resultsRecyclerView.setAdapter(adapter);  // Asigna el adaptador al RecyclerView.
 
-        // Configuración para manejar la acción de búsqueda cuando el usuario envía la consulta
+        // Configuración para manejar la acción de búsqueda cuando el usuario envía la consulta.
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                // Se ejecuta cuando se envía el texto de búsqueda
+                // Se ejecuta cuando el usuario envía el término de búsqueda.
                 if (!TextUtils.isEmpty(query)) {
-                    // Si el término de búsqueda no está vacío, obtenemos el token de acceso para realizar la búsqueda
+                    // Si el término de búsqueda no está vacío, obtenemos el token de acceso para realizar la búsqueda.
                     getAccessToken(query);
                 } else {
-                    // Si el término de búsqueda está vacío, mostramos un mensaje de advertencia
+                    // Si el término de búsqueda está vacío, mostramos un mensaje de advertencia.
                     Toast.makeText(getContext(), "Por favor, ingrese un término de búsqueda", Toast.LENGTH_SHORT).show();
                 }
                 return true;
@@ -82,65 +96,76 @@ public class SpotifyFragment extends Fragment {
         return view;
     }
 
-    // Método para obtener el token de acceso de Spotify, necesario para hacer solicitudes a la API de Spotify
+    /**
+     * Método para obtener el token de acceso de Spotify, necesario para hacer solicitudes a la API de Spotify.
+     * Este token se utiliza para autenticar las solicitudes a la API de Spotify.
+     *
+     * @param query El término de búsqueda que el usuario ingresa.
+     */
     private void getAccessToken(String query) {
-        // Realiza una solicitud a la API de autenticación de Spotify usando Retrofit
+        // Realiza una solicitud a la API de autenticación de Spotify usando Retrofit.
         RetrofitClient.getSpotifyAuthRetrofitInstance().create(SpotifyAuthService.class)
                 .getAccessToken("Basic ZTA1ODFmOGU2NGJiNDZmOTg5ZDE1NDkxYTFkODc5NTI6MjUzZTg2ZTdiNDViNGU3NWIzZTExZGU0NWNiMzU0ODQ=", "client_credentials")
                 .enqueue(new Callback<SpotifyToken>() {
                     @Override
                     public void onResponse(Call<SpotifyToken> call, Response<SpotifyToken> response) {
-                        // Si la respuesta es exitosa y el cuerpo de la respuesta no es nulo
+                        // Si la respuesta es exitosa y el cuerpo de la respuesta no es nulo.
                         if (response.isSuccessful() && response.body() != null) {
-                            // Extrae el token de acceso de la respuesta
+                            // Extrae el token de acceso de la respuesta.
                             String accessToken = response.body().getAccess_token();
-                            // Usa el token de acceso para realizar la búsqueda
+                            // Usa el token de acceso para realizar la búsqueda de música.
                             performSearch(accessToken, query);
                         } else {
-                            // Si ocurre un error al obtener el token, muestra un mensaje al usuario
+                            // Si ocurre un error al obtener el token, muestra un mensaje al usuario.
                             Toast.makeText(getContext(), "Error al obtener el token", Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<SpotifyToken> call, Throwable t) {
-                        // Si ocurre un error en la conexión, muestra un mensaje de error
+                        // Si ocurre un error en la conexión, muestra un mensaje de error.
                         Toast.makeText(getContext(), "Error de conexión: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
 
-    // Método para realizar la búsqueda en la API de Spotify usando el token de acceso
+    /**
+     * Método para realizar la búsqueda en la API de Spotify usando el token de acceso.
+     * Este método realiza una búsqueda de artistas, álbumes y canciones, y luego actualiza el RecyclerView con los resultados.
+     *
+     * @param accessToken El token de acceso de Spotify.
+     * @param query El término de búsqueda que el usuario ha ingresado.
+     */
     private void performSearch(String accessToken, String query) {
-        // Realiza la búsqueda de música (artistas, álbumes y canciones) usando Retrofit
+        // Realiza la búsqueda de música (artistas, álbumes y canciones) usando Retrofit.
         RetrofitClient.getSpotifyRetrofitInstance().create(SpotifySearchService.class)
-                .searchMusic("Bearer " + accessToken, "artist,album,track", query)  // Pasamos el token y el término de búsqueda
+                .searchMusic("Bearer " + accessToken, "artist,album,track", query)  // Pasamos el token y el término de búsqueda.
                 .enqueue(new Callback<SpotifySearchResponse>() {
                     @Override
                     public void onResponse(Call<SpotifySearchResponse> call, Response<SpotifySearchResponse> response) {
-                        // Si la respuesta es exitosa y el cuerpo de la respuesta no es nulo
+                        // Si la respuesta es exitosa y el cuerpo de la respuesta no es nulo.
                         if (response.isSuccessful() && response.body() != null) {
-                            // Obtiene la respuesta con los resultados de la búsqueda
+                            // Obtiene la respuesta con los resultados de la búsqueda.
                             SpotifySearchResponse searchResponse = response.body();
 
-                            // Extrae las listas de artistas, álbumes y canciones de la respuesta
+                            // Extrae las listas de artistas, álbumes y canciones de la respuesta.
                             List<Artist> artists = searchResponse.getArtists().getItems();
                             List<Album> albums = searchResponse.getAlbums().getItems();
                             List<Track> tracks = searchResponse.getTracks().getItems();
 
-                            // Actualiza los resultados en el RecyclerView usando el adaptador
-                            adapter.setArtists(artists);  // Actualiza la lista de artistas
-                            adapter.setAlbums(albums);    // Actualiza la lista de álbumes
-                            adapter.setTracks(tracks);    // Actualiza la lista de canciones
+                            // Actualiza los resultados en el RecyclerView usando el adaptador.
+                            adapter.setArtists(artists);  // Actualiza la lista de artistas.
+                            adapter.setAlbums(albums);    // Actualiza la lista de álbumes.
+                            adapter.setTracks(tracks);    // Actualiza la lista de canciones.
                         } else {
-                            // Si no se encontraron resultados, muestra un mensaje
+                            // Si no se encontraron resultados, muestra un mensaje.
                             Toast.makeText(getContext(), "No se encontraron resultados", Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<SpotifySearchResponse> call, Throwable t) {
-                        // Si ocurre un error en la búsqueda, muestra un mensaje de error
+                        // Si ocurre un error en la búsqueda, muestra un mensaje de error.
                         Toast.makeText(getContext(), "Error en la búsqueda: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
